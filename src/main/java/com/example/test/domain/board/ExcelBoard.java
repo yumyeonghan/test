@@ -1,7 +1,10 @@
 package com.example.test.domain.board;
 
 import com.example.test.domain.entity.BaseEntity;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import org.hibernate.annotations.Comment;
 
 //액셀 저장 게시판(테이블)로 뺴

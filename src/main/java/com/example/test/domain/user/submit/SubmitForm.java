@@ -1,6 +1,5 @@
 package com.example.test.domain.user.submit;
 
-import com.example.test.domain.board.use.UploadFile;
 import com.example.test.domain.entity.BaseEntity;
 import com.example.test.domain.user.Users;
 import jakarta.persistence.*;
@@ -42,8 +41,7 @@ public class SubmitForm extends BaseEntity {
     @OneToMany(mappedBy = "submitForm", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OtherQualifications> otherQualifications = new ArrayList<>();
 
-    @ManyToOne
-    @JoinColumn(name = "users_id", foreignKey = @ForeignKey(name = "fk_submit_form_to_users"))
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "submitForm")
     private Users users;
 
     //양방향 연관관계 편의 메소드

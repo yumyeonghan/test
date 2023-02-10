@@ -2,8 +2,8 @@ package com.example.test.domain.board;
 
 import com.example.test.domain.Comments;
 import com.example.test.domain.board.use.UploadFile;
-import com.example.test.domain.user.Admins;
 import com.example.test.domain.entity.BaseEntity;
+import com.example.test.domain.user.Admins;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Comment;
 

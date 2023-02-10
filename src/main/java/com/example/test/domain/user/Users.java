@@ -1,16 +1,14 @@
 package com.example.test.domain.user;
 
-import com.example.test.domain.board.use.UploadFile;
 import com.example.test.domain.entity.BaseEntity;
 import com.example.test.domain.user.submit.SubmitForm;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Comment;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
+@Table(uniqueConstraints = {@UniqueConstraint(name = "submit_form_id_unique",columnNames = "submitForm_id")})
 public class Users extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,12 +51,13 @@ public class Users extends BaseEntity {
     @Column(nullable = false)
     private String department;
 
-    @OneToMany(mappedBy = "users")
-    private List<SubmitForm> submitForms = new ArrayList<>();
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "submitForm_id", foreignKey = @ForeignKey(name = "fk_users_to_submit_form"))
+    private SubmitForm submitForm;
 
     // 양방향 연관관계 편의 메소드
-    public void addForms(SubmitForm submitForm) {
-        submitForms.add(submitForm);
+    public void addSubmitForms(SubmitForm submitForm) {
+        this.submitForm = submitForm;
         submitForm.setUsers(this);
     }
 
