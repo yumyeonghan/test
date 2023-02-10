@@ -1,5 +1,6 @@
 package com.example.test.domain.board;
 
+import com.example.test.domain.Comments;
 import com.example.test.domain.board.use.UploadFile;
 import com.example.test.domain.user.Admins;
 import com.example.test.domain.entity.BaseEntity;
@@ -30,8 +31,8 @@ public class NoticeBoard extends BaseEntity {
     @Comment("조회수")
     private Integer views;
 
-    @Comment("댓글")
-    private String comment;
+    @OneToMany(mappedBy = "noticeBoard", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comments> comments = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "admins_id", foreignKey = @ForeignKey(name = "fk_notice_board_to_admin"))
