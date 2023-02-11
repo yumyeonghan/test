@@ -1,7 +1,9 @@
 package com.example.test.domain.user.submit;
 
+import com.example.test.domain.board.use.NoticeBoardUploadFile;
 import com.example.test.domain.entity.BaseEntity;
 import com.example.test.domain.user.Users;
+import com.example.test.domain.user.submit.use.SubmitFormUploadFile;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -43,6 +45,16 @@ public class SubmitForm extends BaseEntity {
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "submitForm")
     private Users users;
+
+    @OneToMany(mappedBy = "submitForm", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SubmitFormUploadFile> uploadFiles = new ArrayList<>();
+
+    // 양방향 연관관계 편의 메소드
+    public void addUploadFile(SubmitFormUploadFile uploadFile) {
+        uploadFiles.add(uploadFile);
+        uploadFile.setSubmitForm(this);
+    }
+
 
     //양방향 연관관계 편의 메소드
     public void addOtherQualifications(OtherQualifications otherQualification) {

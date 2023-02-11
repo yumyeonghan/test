@@ -1,7 +1,7 @@
 package com.example.test.domain.board;
 
 import com.example.test.domain.Comments;
-import com.example.test.domain.board.use.UploadFile;
+import com.example.test.domain.board.use.NoticeBoardUploadFile;
 import com.example.test.domain.entity.BaseEntity;
 import com.example.test.domain.user.Admins;
 import jakarta.persistence.*;
@@ -39,10 +39,10 @@ public class NoticeBoard extends BaseEntity {
     private Admins admins;
 
     @OneToMany(mappedBy = "noticeBoard", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UploadFile> uploadFiles = new ArrayList<>();
+    private List<NoticeBoardUploadFile> uploadFiles = new ArrayList<>();
 
     // 양방향 연관관계 편의 메소드
-    public void addUploadFile(UploadFile uploadFile) {
+    public void addUploadFile(NoticeBoardUploadFile uploadFile) {
         uploadFiles.add(uploadFile);
         uploadFile.setNoticeBoard(this);
     }
